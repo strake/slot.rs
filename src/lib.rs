@@ -13,6 +13,11 @@ impl<T> Slot<T> {
     pub fn new() -> Self { unsafe { mem::uninitialized() } }
 }
 
+impl<T> Default for Slot<T> {
+    #[inline]
+    fn default() -> Self { unsafe { mem::uninitialized() } }
+}
+
 impl<T> From<T> for Slot<T> {
     #[inline]
     fn from(x: T) -> Self { Slot { x } }
