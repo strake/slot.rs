@@ -2,10 +2,10 @@
 
 #![feature(untagged_unions)]
 
-use core::mem;
+use core::{mem, ptr};
 
 #[allow(unions_with_drop_fields)]
-#[derive(Clone, Copy)]
+#[derive(Copy)]
 pub union Slot<T> { pub x: T }
 
 impl<T> Slot<T> {
@@ -20,6 +20,11 @@ impl<T> Slot<T> {
 
     #[inline]
     pub unsafe fn unwrap(self) -> T { self.x }
+}
+
+impl<T> Clone for Slot<T> {
+    #[inline]
+    fn clone(&self) -> Self { unsafe { ptr::read(self) } }
 }
 
 impl<T> Default for Slot<T> {
