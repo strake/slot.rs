@@ -1,5 +1,6 @@
 #![no_std]
 
+#![feature(const_fn)]
 #![feature(untagged_unions)]
 
 use core::{mem, ptr};
@@ -10,7 +11,11 @@ pub union Slot<T> { pub x: T }
 
 impl<T> Slot<T> {
     #[inline]
-    pub fn new() -> Self { unsafe { mem::uninitialized() } }
+    pub const fn new() -> Self {
+        #[allow(unions_with_drop_fields)]
+        union U<T> { u: (), v: T }
+        Self { x: unsafe { U { u: () }.v } }
+    }
 
     #[inline]
     pub unsafe fn as_ref(&self) -> &T { &self.x }
