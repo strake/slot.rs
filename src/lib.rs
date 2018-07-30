@@ -13,8 +13,8 @@ impl<T> Slot<T> {
     #[inline]
     pub const fn new() -> Self {
         #[allow(unions_with_drop_fields)]
-        union U<T> { u: (), v: T }
-        Self { x: unsafe { U { u: () }.v } }
+        union U<T> { u: (), v: Slot<T> }
+        unsafe { U { u: () }.v }
     }
 
     #[inline]
