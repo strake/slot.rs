@@ -3,7 +3,7 @@
 #![feature(const_fn)]
 #![feature(untagged_unions)]
 
-use core::{mem, ptr};
+use core::ptr;
 
 #[allow(unions_with_drop_fields)]
 #[derive(Copy)]
@@ -34,7 +34,7 @@ impl<T> Clone for Slot<T> {
 
 impl<T> Default for Slot<T> {
     #[inline]
-    fn default() -> Self { unsafe { mem::uninitialized() } }
+    fn default() -> Self { Self::new() }
 }
 
 impl<T> From<T> for Slot<T> {
