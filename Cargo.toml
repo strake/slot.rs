@@ -1,6 +1,6 @@
 [package]
 name = "slot"
-version = "0.2.4"
+version = "0.2.5"
 authors = ["M Farkas-Dyck <strake888@gmail.com>"]
 description = "type-shaped chunk of memory"
 license = "MIT OR Apache-2.0"
