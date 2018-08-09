@@ -1,6 +1,7 @@
 #![no_std]
 
 #![feature(const_fn)]
+#![feature(const_fn_union)]
 #![feature(untagged_unions)]
 
 use core::ptr;
